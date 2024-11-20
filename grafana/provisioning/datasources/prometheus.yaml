@@ -1,7 +1,6 @@
-apiVersion: 1
 datasources:
   - name: Prometheus
     type: prometheus
-    url: http://prometheus:9090  # Replace with your Prometheus URL if needed
+    url: http://prometheus:9090  # Usa il nome del servizio di Prometheus
     access: proxy
     isDefault: true
