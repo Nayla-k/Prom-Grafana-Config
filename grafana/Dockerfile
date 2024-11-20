@@ -1,7 +1,7 @@
 FROM grafana/grafana:latest
 
 # Copy the provisioning directory into the container
-COPY grafana/provisioning /etc/grafana/provisioning
+COPY ./provisioning /etc/grafana/provisioning
 
 # Expose the default port for Grafana
 EXPOSE 3000
