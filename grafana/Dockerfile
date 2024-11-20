@@ -1,9 +1,11 @@
 FROM grafana/grafana:latest
 
-# Copia il file di configurazione di Grafana
-COPY grafana/grafana.ini /etc/grafana/grafana.ini
+# Copy the provisioning directory into the container
+COPY grafana/provisioning /etc/grafana/provisioning
 
-
-# Espone la porta di Grafana
+# Expose the default port for Grafana
 EXPOSE 3000
+
+CMD ["/bin/bash", "-c", "/usr/share/grafana/bin/grafana-server web"]
+
 
