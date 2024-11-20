@@ -14,8 +14,8 @@ services:
     depends_on:
       - prometheus  # Ensure Prometheus starts before Grafana
     volumes:
-      - ./Grafana/grafana.ini:/etc/grafana/grafana.ini  # Mount your Grafana config
-      - ./Grafana/provisioning:/etc/grafana/provisioning  # Mount your Grafana provisioning folder
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini  # Mount your Grafana config
+      - ./grafana/provisioning:/etc/grafana/provisioning  # Mount your Grafana provisioning folder
     ports:
       - "3000:3000"  # Expose Grafana on port 3000
     
