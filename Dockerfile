@@ -1,21 +1,22 @@
-# Use the official Prometheus image as the base image
-FROM prom/prometheus:latest
+# Stage 1: Build Prometheus
+FROM prom/prometheus:latest AS prometheus
 
-# Copy the prometheus.yml configuration file to the container's Prometheus configuration folder
+# Copy the Prometheus configuration file
 COPY prometheus.yml /etc/prometheus/prometheus.yml
 
-# Expose Prometheus port (default is 9090)
+# Expose Prometheus port
 EXPOSE 9090
 
-# Use the official Grafana image as the base image
-FROM grafana/grafana:latest
+# Stage 2: Build Grafana
+FROM grafana/grafana:latest AS grafana
 
-# Copy the Grafana configuration file and provisioning folder into the Grafana container
+# Copy the Grafana configuration file
 COPY Grafana/grafana.ini /etc/grafana/grafana.ini
 COPY Grafana/provisioning /etc/grafana/provisioning
 
-# Expose Grafana port (default is 3000)
+# Expose Grafana port
 EXPOSE 3000
 
-# Start Prometheus and Grafana in the background
-CMD ["/bin/bash", "-c", "prometheus & /bin/bash /etc/grafana/start.sh"]
+# Run both Prometheus and Grafana in a single container
+CMD ["/bin/bash", "-c", "prometheus --config.file=/etc/prometheus/prometheus.yml & /bin/bash /etc/grafana/start.sh"]
+
