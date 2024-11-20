@@ -1,6 +1,6 @@
 datasources:
   - name: Prometheus
     type: prometheus
-    url: http://prometheus:9090  # Usa il nome del servizio di Prometheus
+    url: https://prometheus-config.onrender.com  # Usa il nome del servizio di Prometheus
     access: proxy
     isDefault: true
