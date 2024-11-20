@@ -1,21 +1,29 @@
-version: '3'
+version: '3.8'
+
 services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount your Prometheus config
     ports:
-      - "9090:9090"  # Expose Prometheus on port 9090
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    depends_on:
-      - prometheus  # Ensure Prometheus starts before Grafana
-    volumes:
-      - ./grafana/grafana.ini:/etc/grafana/grafana.ini  # Mount your Grafana config
-      - ./grafana/provisioning:/etc/grafana/provisioning  # Mount your Grafana provisioning folder
     ports:
-      - "3000:3000"  # Expose Grafana on port 3000
-    
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
