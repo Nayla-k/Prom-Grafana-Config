@@ -11,8 +11,8 @@ EXPOSE 9090
 FROM grafana/grafana:latest AS grafana
 
 # Copy the Grafana configuration file
-COPY Grafana/grafana.ini /etc/grafana/grafana.ini
-COPY Grafana/provisioning /etc/grafana/provisioning
+COPY grafana/grafana.ini /etc/grafana/grafana.ini
+COPY grafana/provisioning /etc/grafana/provisioning
 
 # Expose Grafana port
 EXPOSE 3000
