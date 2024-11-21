@@ -2,7 +2,8 @@ scrape_configs:
   - job_name: "prometheus"
     static_configs:
       - targets: ["prom-config.onrender.com"]  
-   - job_name: "diagnostic-sender"
+  
+  - job_name: "diagnostic-sender"
     metrics_path: "/metrics"  # This specifies the path for the metrics endpoint
     scheme: "https"  # This specifies that Prometheus should use HTTPS
     static_configs:
