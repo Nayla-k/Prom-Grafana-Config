@@ -4,7 +4,10 @@ FROM grafana/grafana:latest
 COPY ./provisioning /etc/grafana/provisioning
 
 # Ensure the dashboards are copied to the right location in Grafana
-COPY ./provisioning/dashboards /var/lib/grafana/dashboards
+COPY ./provisioning/dashboards /etc/grafana/provisioning/dashboards
+
+# Ensure proper permissions
+RUN chmod -R 755 /etc/grafana/provisioning
 
 # Expose the default Grafana port
 EXPOSE 3000
