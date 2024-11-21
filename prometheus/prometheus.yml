@@ -6,5 +6,5 @@ scrape_configs:
     metrics_path: "/metrics"  # This specifies the path for the metrics endpoint
     scheme: "https"  # This specifies that Prometheus should use HTTPS
     static_configs:
-      - targets: ['metrics-9fhe.onrender.com']  # The host of the diagnostic sender service
+      - targets: ["metrics-9fhe.onrender.com"]  # The host of the diagnostic sender service
     scrape_interval: 15s
