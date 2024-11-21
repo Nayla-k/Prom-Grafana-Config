@@ -1,14 +1,16 @@
 FROM grafana/grafana:latest
 
-# Copy the provisioning directory into the container
+# Copy the provisioning directory with the dashboards into the container
 COPY ./provisioning /etc/grafana/provisioning
 
-# Expose the default port for Grafana
+# Ensure the dashboards are copied to the right location in Grafana
+COPY ./provisioning/dashboards /var/lib/grafana/dashboards
+
+# Expose the default Grafana port
 EXPOSE 3000
 
-# Set a volume for Grafana data
-VOLUME ["/var/lib/grafana"]
-
+# Start Grafana
 CMD ["/bin/bash", "-c", "/usr/share/grafana/bin/grafana-server web"]
+
 
 
