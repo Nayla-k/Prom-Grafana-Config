@@ -11,6 +11,10 @@ from flask import Flask, request
 app = Flask(__name__)
 metrics_data = ""
 
+@app.route("/")
+def root():
+    return "Metrics service is running!", 200
+    
 @app.route("/metrics", methods=["GET"])
 def metrics():
     global metrics_data
