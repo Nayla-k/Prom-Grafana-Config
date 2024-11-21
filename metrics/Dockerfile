@@ -11,20 +11,30 @@ from flask import Flask, request
 app = Flask(__name__)
 metrics_data = ""
 
+# Home route
 @app.route("/")
 def root():
     return "Metrics service is running!", 200
     
+# Metrics route - GET to fetch current metrics
 @app.route("/metrics", methods=["GET"])
 def metrics():
     global metrics_data
     return metrics_data, 200, {"Content-Type": "text/plain"}
 
+# Route to update the metrics
 @app.route("/update_metrics", methods=["POST"])
 def update_metrics():
     global metrics_data
     metrics_data = request.data.decode("utf-8")
     return "Metrics updated", 200
+
+# Route to delete old metrics
+@app.route("/delete_metrics", methods=["DELETE"])
+def delete_metrics():
+    global metrics_data
+    metrics_data = ""  # Clear the old metrics
+    return "Metrics deleted", 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
