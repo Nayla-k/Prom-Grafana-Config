@@ -4,5 +4,5 @@ scrape_configs:
       - targets: ["prom-config.onrender.com"]  
   - job_name: "diagnostic-sender"
     static_configs:
-      - targets: ['host.docker.internal:9100']
+      - targets: [' 172.23.112.1:8080']
     scrape_interval: 15s
