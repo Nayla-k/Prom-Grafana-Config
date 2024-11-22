@@ -5,7 +5,15 @@ providers:
     folder: ''
     type: file
     disableDeletion: false
+    editable: true
     updateIntervalSeconds: 10
+    allowUiUpdates: true
     options:
       path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: true
+    # Add this to get more info about dashboard loading
+    searchRecursive: true
+    defaults:
+      editable: true
+      style: 'dark'
 
