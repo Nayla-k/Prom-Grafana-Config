@@ -1,9 +1,9 @@
 FROM prom/prometheus:latest
 
-# Copy the configuration file for Prometheus
+# Copy the Prometheus configuration file
 COPY prometheus.yml /etc/prometheus/prometheus.yml
 
-# Add the retention flag to increase retention period (e.g., 365 days = 1 year)
+# Set the command to start Prometheus with retention time flag (1 year retention in this case)
 CMD ["/bin/prometheus", "--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=365d"]
 
 # Expose Prometheus port
