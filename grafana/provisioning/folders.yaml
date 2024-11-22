@@ -1,0 +1,6 @@
+apiVersion: 1
+
+folders:
+  - name: 'Medical Machines Info'
+    uid: Imaginalis123
+    orgId: 1
