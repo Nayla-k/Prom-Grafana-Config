@@ -1,8 +1,10 @@
 FROM prom/prometheus:latest
 
-# Copia la configurazione di Prometheus
+# Copy the configuration file for Prometheus
 COPY prometheus.yml /etc/prometheus/prometheus.yml
 
-# Espone la porta di Prometheus
-EXPOSE 9090
+# Add the retention flag to increase retention period (e.g., 365 days = 1 year)
+CMD ["/bin/prometheus", "--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=365d"]
 
+# Expose Prometheus port
+EXPOSE 9090
