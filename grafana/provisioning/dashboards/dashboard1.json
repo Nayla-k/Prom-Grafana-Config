@@ -19,7 +19,6 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
-  "folderUid": "Imaginalis123",
   "links": [],
   "panels": [
     {
@@ -571,6 +570,10 @@
           "id": "groupBy",
           "options": {
             "fields": {
+              "daily_metrics": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
               "diagnostic-sender": {
                 "aggregations": [],
                 "operation": "groupby"
@@ -596,7 +599,7 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "diagnostic-sender",
+            "regex": "daily_metrics",
             "renamePattern": "Values"
           }
         },
@@ -801,6 +804,10 @@
           "id": "groupBy",
           "options": {
             "fields": {
+              "Imaginalis": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
               "metrics-9fhe.onrender.com": {
                 "aggregations": [],
                 "operation": "groupby"
@@ -833,7 +840,7 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "metrics-9fhe.onrender.com",
+            "regex": "Imaginalis",
             "renamePattern": "Values"
           }
         },
@@ -852,7 +859,15 @@
         },
         {
           "id": "convertFieldType",
-          "options": {}
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "Percentage (%)"
+              }
+            ],
+            "fields": {}
+          }
         }
       ],
       "type": "table"
@@ -1132,8 +1147,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Medical Machine General Informations",
-  "uid": "fe4mag9ilngg0d",
-  "version": 22,
+  "title": "Medical Machine General Informations Copy",
+  "uid": "de4ptqgwc9xxca",
+  "version": 2,
   "weekStart": ""
 }
