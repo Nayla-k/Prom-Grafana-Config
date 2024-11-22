@@ -1,13 +1,20 @@
+# Use the official Grafana image as a base
 FROM grafana/grafana:latest
 
 # Switch to root user to modify permissions
 USER root
 
-# Copy the provisioning directory with the dashboards into the container
+# Copy the custom grafana.ini configuration file into the container
+COPY ./grafana.ini /etc/grafana/grafana.ini
+
+# Ensure the /var/log/grafana directory exists and has correct permissions
+RUN mkdir -p /var/log/grafana && chown -R grafana:grafana /var/log/grafana
+
+# Copy the provisioning directory (if not already done) with dashboards and datasources
 COPY ./provisioning /etc/grafana/provisioning
 
-# Ensure that the /etc/grafana/provisioning directory and files inside have the correct permissions
-RUN chmod -R 755 /etc/grafana/provisioning
+# Ensure correct permissions on the provisioning directory
+RUN chown -R grafana:grafana /etc/grafana/provisioning
 
 # Switch back to the default Grafana user
 USER grafana
