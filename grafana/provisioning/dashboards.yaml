@@ -11,9 +11,7 @@ providers:
     options:
       path: /etc/grafana/provisioning/dashboards
       foldersFromFilesStructure: true
-    # Add this to get more info about dashboard loading
     searchRecursive: true
     defaults:
       editable: true
       style: 'dark'
-
