@@ -8,13 +8,13 @@ USER root
 COPY ./grafana.ini /etc/grafana/grafana.ini
 
 # Ensure the /var/log/grafana directory exists and has correct permissions
-RUN mkdir -p /var/log/grafana && chown -R grafana:grafana /var/log/grafana
+RUN mkdir -p /var/log/grafana && chown -R 472:472 /var/log/grafana
 
 # Copy the provisioning directory (if not already done) with dashboards and datasources
 COPY ./provisioning /etc/grafana/provisioning
 
 # Ensure correct permissions on the provisioning directory
-RUN chown -R grafana:grafana /etc/grafana/provisioning
+RUN chown -R 472:472 /etc/grafana/provisioning
 
 # Switch back to the default Grafana user
 USER grafana
