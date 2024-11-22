@@ -4,7 +4,7 @@ FROM prom/prometheus:latest
 COPY prometheus.yml /etc/prometheus/prometheus.yml
 
 # Set the arguments for Prometheus (e.g., 365 days retention)
-CMD ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=365d"]
+CMD ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=730d"]
 
 # Expose Prometheus port
 EXPOSE 9090

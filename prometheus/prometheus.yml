@@ -1,5 +1,6 @@
 global:
   scrape_interval: 15s  # Scrape every 15 seconds
+  log_level: debug
 scrape_configs:
   - job_name: "prometheus"
     static_configs:
