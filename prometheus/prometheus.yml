@@ -1,13 +1,15 @@
 global:
   scrape_interval: 15s  # Scrape every 15 seconds
+
 scrape_configs:
   - job_name: "prometheus"
     static_configs:
       - targets: ["prom-config.onrender.com"]  
-  
+
   - job_name: "diagnostic-sender"
-    metrics_path: "/metrics"  # This specifies the path for the metrics endpoint
-    scheme: "https"  # This specifies that Prometheus should use HTTPS
+    honor_labels: true   # Prevent PushGateway labels like "instance" from being overwritten
+    metrics_path: "/metrics"  # PushGateway's metrics endpoint
+    scheme: "https"  # HTTPS for secure communication
     static_configs:
-      - targets: ["metrics-9fhe.onrender.com"]  # The host of the diagnostic sender service
-    scrape_interval: 15s
+      - targets: ["pushgateaway.onrender.com"]  # Use the PushGateway's hostname
+    scrape_interval: 15s  # Define scraping frequency
