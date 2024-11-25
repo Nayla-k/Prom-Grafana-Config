@@ -1,0 +1,455 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ae4zqc57wh88wd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "transparent",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Patients"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Acquisitions"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "7-Day Avg Acquisitions"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "7-Day Avg Patients"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "daily_patient_count"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ae4zqc57wh88wd"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    acquisition_date AS time,\r\n    COUNT(DISTINCT study_uid) AS \"Patients\"\r\nFROM SeriesInfo\r\nWHERE $__timeFilter(acquisition_date)\r\n    AND station_model = '$machine_model'\r\n    AND station_sn = '$machine_serial'\r\nGROUP BY acquisition_date\r\nORDER BY acquisition_date;\r\n",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ae4zqc57wh88wd"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    acquisition_date as time,\r\n    COUNT(*) as \"Acquisitions\"\r\nFROM SeriesInfo\r\nWHERE $__timeFilter(acquisition_date)\r\nGROUP BY acquisition_date\r\nORDER BY acquisition_date;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Patients and Acquisitions per day",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ae4zqc57wh88wd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ae4zqc57wh88wd"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH RECURSIVE \r\ndate_series AS (\r\n    SELECT MIN(DATE(acquisition_date))::timestamp as date\r\n    FROM SeriesInfo\r\n    WHERE station_model = '$machine_model' \r\n    AND station_sn = '$machine_serial'\r\n    \r\n    UNION ALL\r\n    \r\n    SELECT date + INTERVAL '1 day'\r\n    FROM date_series\r\n    WHERE date < CURRENT_DATE::timestamp\r\n),\r\ndaily_counts AS (\r\n    SELECT \r\n        DATE(acquisition_date)::timestamp as date,\r\n        station_model,\r\n        station_sn,\r\n        COUNT(CASE WHEN modality = 'CT' THEN 1 END) as daily_ct,\r\n        COUNT(CASE WHEN modality = 'DR' THEN 1 END) as daily_dr,\r\n        COUNT(CASE WHEN modality = 'FL' THEN 1 END) as daily_fl,\r\n        COUNT(DISTINCT p.series_uid) as daily_patients\r\n    FROM SeriesInfo s\r\n    LEFT JOIN PatientInfo p ON p.series_uid = s.series_uid\r\n    WHERE acquisition_date IS NOT NULL\r\n      AND station_model = '$machine_model'\r\n      AND station_sn = '$machine_serial'\r\n    GROUP BY DATE(acquisition_date), station_model, station_sn\r\n),\r\nrunning_totals AS (\r\n    SELECT \r\n        date_series.date as time,\r\n        '$machine_model' as station_model,\r\n        '$machine_serial' as station_sn,\r\n        SUM(COALESCE(daily_ct, 0)) OVER (ORDER BY date_series.date) as cumulative_ct,\r\n        SUM(COALESCE(daily_dr, 0)) OVER (ORDER BY date_series.date) as cumulative_dr,\r\n        SUM(COALESCE(daily_fl, 0)) OVER (ORDER BY date_series.date) as cumulative_fl,\r\n        SUM(COALESCE(daily_patients, 0)) OVER (ORDER BY date_series.date) as cumulative_patients\r\n    FROM date_series\r\n    LEFT JOIN daily_counts ON date_series.date = daily_counts.date\r\n)\r\nSELECT \r\n    time,\r\n    station_model,\r\n    station_sn,\r\n    CASE \r\n        WHEN cumulative_ct = 0 THEN FIRST_VALUE(cumulative_ct) OVER (ORDER BY time DESC)\r\n        ELSE cumulative_ct \r\n    END as cumulative_ct,\r\n    CASE \r\n        WHEN cumulative_dr = 0 THEN FIRST_VALUE(cumulative_dr) OVER (ORDER BY time DESC)\r\n        ELSE cumulative_dr \r\n    END as cumulative_dr,\r\n    CASE \r\n        WHEN cumulative_fl = 0 THEN FIRST_VALUE(cumulative_fl) OVER (ORDER BY time DESC)\r\n        ELSE cumulative_fl \r\n    END as cumulative_fl,\r\n    CASE \r\n        WHEN cumulative_patients = 0 THEN FIRST_VALUE(cumulative_patients) OVER (ORDER BY time DESC)\r\n        ELSE cumulative_patients \r\n    END as cumulative_patients\r\nFROM running_totals\r\nWHERE time BETWEEN $__timeFrom() AND $__timeTo()\r\nORDER BY time;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Increment of nr. of Cts, DRs, FLs and Patients in time",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "cumulative_ct",
+            "renamePattern": "CTs"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "cumulative_dr",
+            "renamePattern": "DRs"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "cumulative_fl",
+            "renamePattern": "FLs"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "cumulative_patients",
+            "renamePattern": "Patients"
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "Vimago3030",
+          "value": "Vimago3030"
+        },
+        "definition": "label_values(model)",
+        "label": "Model",
+        "name": "machine_model",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(model)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "VS0314",
+          "value": "VS0314"
+        },
+        "definition": "label_values(serial)",
+        "label": "Serial",
+        "name": "machine_serial",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(serial)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Clinical Timeline",
+  "uid": "ae4zqn2etl7uob",
+  "version": 5,
+  "weekStart": ""
+}
