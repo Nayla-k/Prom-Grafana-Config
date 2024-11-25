@@ -4,3 +4,17 @@ datasources:
     url: https://prom-config.onrender.com  # Usa il nome del servizio di Prometheus
     access: proxy
     isDefault: true
+  - name: 'PostgreSQL'
+    type: 'postgres'
+    access: 'direct'
+    access: direct
+    editable: true
+    jsonData:
+      host: 'dpg-csg9vo88fa8c73ft8ncg-a.frankfurt-postgres.render.com'  # Replace with your PostgreSQL host (e.g., localhost or IP)
+      database: 'dtabasediagnostictool'  # Replace with your PostgreSQL database name
+      user: 'dtabasediagnostictool_user'  # Replace with your PostgreSQL username
+      sslMode: 'disable'  # Adjust this if you use SSL for PostgreSQL
+    secureJsonData:
+      password: 'Jm2tQMulmWysz7XYwGINr8p5olVwTyRU'
+
+    
