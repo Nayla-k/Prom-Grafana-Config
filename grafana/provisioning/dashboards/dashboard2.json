@@ -1,4 +1,7 @@
 {
+  "id": null,
+  "uid": "dashboard2-uid", 
+  "title": "Dashboard 2",  
   "annotations": {
     "list": [
       {
@@ -18,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
     {

@@ -2,8 +2,7 @@ apiVersion: 1
 providers:
   - name: 'default'
     orgId: 1
-    folder: 'Medical Machines Info'
-    folderUid: 'Imaginalis123'
+    folder: 'Medical Machines Info'  # Only specify the folder name
     type: file
     disableDeletion: false
     editable: true
